@@ -59,7 +59,7 @@ class _HomePage extends State<HomePage> {
               ),
             ),
             ListTile(
-              title: Text('Item 1'),
+              title: Text('About'),
               onTap: () {
                 // Update the state of the app
                 // ...
