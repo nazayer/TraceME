@@ -17,15 +17,15 @@ class _HomePage extends State<HomePage> {
 
   static const List<Widget> _widgetOptions = <Widget>[
     Text(
-      'Index 0: Home',
+      'Home',
       style: optionStyle,
     ),
     Text(
-      'Index 1: Business',
+      'Alerts',
       style: optionStyle,
     ),
     Text(
-      'Index 2: School',
+      'Profile',
       style: optionStyle,
     ),
   ];
@@ -44,6 +44,38 @@ class _HomePage extends State<HomePage> {
         centerTitle: true,
         title: Text('TraceMe dashboard'),
       ),
+      drawer: Drawer(
+        // Add a ListView to the drawer. This ensures the user can scroll
+        // through the options in the drawer if there isn't enough vertical
+        // space to fit everything.
+        child: ListView(
+          // Important: Remove any padding from the ListView.
+          padding: EdgeInsets.zero,
+          children: <Widget>[
+            DrawerHeader(
+              child: Text('Menu'),
+              decoration: BoxDecoration(
+                color: Colors.amber,
+              ),
+            ),
+            ListTile(
+              title: Text('Item 1'),
+              onTap: () {
+                // Update the state of the app
+                // ...
+                // Then close the drawer
+                Navigator.pop(context);
+              },
+            ),
+            ListTile(
+              title: Text('Log out'),
+              onTap: () {
+                authBloc.add(UserLoggedOut());
+              },
+            ),
+          ],
+        ),
+      ),
       body: SafeArea(
         minimum: const EdgeInsets.all(16),
         child: Center(
@@ -53,13 +85,6 @@ class _HomePage extends State<HomePage> {
               const SizedBox(
                 height: 12,
               ),
-              FlatButton(
-                textColor: Theme.of(context).primaryColor,
-                child: Text('Logout'),
-                onPressed: () {
-                  authBloc.add(UserLoggedOut());
-                }, // change this
-              )
             ],
           ),
         ),
