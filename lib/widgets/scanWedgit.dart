@@ -24,19 +24,14 @@ class ScanWidgetState extends State<ScanWidget> {
           _scanning
               ? MyBlinkingText()
               : Text(
-                  'Not enabled',
+                  'Not tracing',
                   style: flashingStyle,
                   textAlign: TextAlign.center,
                 ),
           SizedBox(width: 20.00, height: 20.00),
           _scanning ? stop() : scan(),
           SizedBox(width: 20.00, height: 20.00),
-          _scanning
-              ? Text('Stop tracing?',
-                  textAlign: TextAlign.center, style: optionStyle)
-              : Text('Start tracing?',
-                  textAlign: TextAlign.center, style: optionStyle),
-          Text('$_scanning'),
+          Text('$_scanning', textAlign: TextAlign.center, style: optionStyle),
         ]);
   }
 
