@@ -41,7 +41,7 @@ class HomeWidget extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         Text('Home', style: optionStyle, textAlign: TextAlign.center),
-        SizedBox(width: 100, height: 80.00),
+        SizedBox(width: 100.00, height: 50.00),
         ScanWidget(),
       ],
     );

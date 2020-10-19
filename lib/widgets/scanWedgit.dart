@@ -1,7 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'blinkingText.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../blocs/blocs.dart';
+import 'package:flutter/animation.dart';
 
 class ScanWidget extends StatefulWidget {
   @override
@@ -19,6 +21,13 @@ class ScanWidgetState extends State<ScanWidget> {
         mainAxisSize: MainAxisSize.max,
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
+          _scanning
+              ? MyBlinkingText()
+              : Text(
+                  'Not enabled',
+                  style: flashingStyle,
+                  textAlign: TextAlign.center,
+                ),
           SizedBox(width: 20.00, height: 20.00),
           _scanning ? stop() : scan(),
           SizedBox(width: 20.00, height: 20.00),
@@ -68,6 +77,12 @@ class ScanWidgetState extends State<ScanWidget> {
           }),
     );
   }
+
+  static const TextStyle flashingStyle = TextStyle(
+    fontSize: 25,
+    fontWeight: FontWeight.bold,
+    color: Colors.red,
+  );
 
   static const TextStyle optionStyle = TextStyle(
     fontSize: 30,
