@@ -21,11 +21,12 @@ void main() => runApp(
       ),
     ));
 
+// TODO: put the class below in its own file
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Authentication Demo',
+      title: 'Trace me',
       theme: ThemeData(
         primarySwatch: Colors.amber,
       ),
