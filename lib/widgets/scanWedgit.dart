@@ -64,11 +64,14 @@ class ScanWidgetState extends State<ScanWidget> {
           final networks = await WifiFlutter.wifiNetworks;
           setState(() {
             _platformVersion = networks
-                .map((network) => Text('''
+                .map((network) => Text(
+                      '''
                 Ssid: ${network.ssid}
                 Strength: ${network.rssi}
-                Timestamp: ${network.isSecure}''',
-                    textAlign: TextAlign.center, style: optionStyle))
+                Timestamp: ${DateTime.now()}''',
+                      textAlign: TextAlign.left,
+                      style: optionStyle,
+                    ))
                 .toList();
             _scanning = !_scanning;
           });
@@ -103,8 +106,6 @@ class ScanWidgetState extends State<ScanWidget> {
     color: Colors.red,
   );
 
-  static const TextStyle optionStyle = TextStyle(
-    fontSize: 20,
-    fontWeight: FontWeight.bold,
-  );
+  static const TextStyle optionStyle =
+      TextStyle(fontSize: 15, fontWeight: FontWeight.w500);
 }
