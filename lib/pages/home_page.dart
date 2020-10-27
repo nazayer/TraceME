@@ -51,6 +51,15 @@ class _HomePage extends State<HomePage> {
               ),
             ),
             ListTile(
+              title: Text('Profile'),
+              onTap: () {
+                // Update the state of the app
+                // ...
+                // Then close the drawer
+                Navigator.pop(context);
+              },
+            ),
+            ListTile(
               title: Text('About'),
               onTap: () {
                 // Update the state of the app
