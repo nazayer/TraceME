@@ -20,7 +20,6 @@ class ScanWidgetState extends State<ScanWidget> {
 
   List<Widget> _platformVersion = [];
   bool _scanning = false;
-  List<String> _bssid;
 
   @override
   Widget build(BuildContext context) {
@@ -38,7 +37,11 @@ class ScanWidgetState extends State<ScanWidget> {
           SizedBox(width: 20.00, height: 20.00),
           _scanning ? stop() : scan(),
           SizedBox(width: 20.00, height: 20.00),
-          Text('$_bssid', textAlign: TextAlign.center, style: optionStyle),
+          Column(
+            mainAxisSize: MainAxisSize.max,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: _platformVersion,
+          ),
         ]);
   }
 
@@ -61,22 +64,15 @@ class ScanWidgetState extends State<ScanWidget> {
           final networks = await WifiFlutter.wifiNetworks;
           setState(() {
             _platformVersion = networks
-                .map((network) => Text(
-                    "Ssid ${network.ssid} - Strength ${network.rssi} - Secure ${network.isSecure}"))
+                .map((network) => Text('''
+                Ssid: ${network.ssid}
+                Strength: ${network.rssi}
+                Timestamp: ${network.isSecure}''',
+                    textAlign: TextAlign.center, style: optionStyle))
                 .toList();
-            // _bssid =
-            //     networks.map((network) => Text("${network.ssid}")).toList();
-            _bssid = networks.map((network) => network.ssid).toList();
-
             _scanning = !_scanning;
           });
         },
-        // onPressed: () {
-        //   final networks = WifiFlutter.scanNetworks();
-        //   setState(() {
-        //     _scanning = !_scanning;
-        //   });
-        // },
       ),
     );
   }
@@ -95,7 +91,7 @@ class ScanWidgetState extends State<ScanWidget> {
           onPressed: () {
             setState(() {
               _scanning = !_scanning;
-              _bssid = null;
+              _platformVersion.clear();
             });
           }),
     );
@@ -108,7 +104,7 @@ class ScanWidgetState extends State<ScanWidget> {
   );
 
   static const TextStyle optionStyle = TextStyle(
-    fontSize: 30,
+    fontSize: 20,
     fontWeight: FontWeight.bold,
   );
 }

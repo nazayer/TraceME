@@ -13,9 +13,7 @@ dependencies:
   wifi_flutter: ^0.1.0+1
   flutter:
     sdk: flutter
-
- 
- 
+    
   cupertino_icons: ^0.1.2
 
 dev_dependencies:
