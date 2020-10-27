@@ -26,5 +26,6 @@ class AlertWidget extends StatelessWidget {
   static const TextStyle noAlertStyle = TextStyle(
     fontSize: 20,
     fontWeight: FontWeight.bold,
+    color: Colors.green,
   );
 }
