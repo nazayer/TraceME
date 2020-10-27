@@ -50,7 +50,7 @@ class ScanWidgetState extends State<ScanWidget> {
 
   Widget scan() {
     return SizedBox(
-      width: 150.0,
+      width: 200,
       height: 150.0,
       child: FloatingActionButton(
         child: new Icon(
@@ -74,8 +74,8 @@ class ScanWidgetState extends State<ScanWidget> {
                 Ssid: ${network.ssid}
                 Strength: ${network.rssi}
                 Timestamp: ${DateTime.now()}''',
-                      textAlign: TextAlign.left,
                       style: optionStyle,
+                      textAlign: TextAlign.left,
                     ))
                 .toList();
             _scanning = !_scanning;
@@ -111,6 +111,8 @@ class ScanWidgetState extends State<ScanWidget> {
     color: Colors.red,
   );
 
-  static const TextStyle optionStyle =
-      TextStyle(fontSize: 15, fontWeight: FontWeight.w500);
+  static const TextStyle optionStyle = TextStyle(
+    fontSize: 15,
+    fontWeight: FontWeight.w500,
+  );
 }

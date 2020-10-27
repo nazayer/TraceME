@@ -4,6 +4,7 @@ import 'package:flutter_bloc_authentication/blocs/authentication/authentication.
 import 'package:flutter_bloc_authentication/widgets/alertsWidget.dart';
 import '../models/models.dart';
 import '../widgets/homeWidget.dart';
+import '../widgets/flagWidget.dart';
 
 class HomePage extends StatefulWidget {
   HomePage({Key key}) : super(key: key);
@@ -14,16 +15,11 @@ class HomePage extends StatefulWidget {
 
 class _HomePage extends State<HomePage> {
   int _selectedIndex = 0;
-  static const TextStyle optionStyle =
-      TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
 
   static List<Widget> _widgetOptions = <Widget>[
     HomeWidget(),
     AlertWidget(),
-    Text(
-      'Profile',
-      style: optionStyle,
-    ),
+    FlagWidget(),
   ];
 
   void _onItemTapped(int index) {
@@ -97,7 +93,7 @@ class _HomePage extends State<HomePage> {
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.person),
-            label: 'Profile',
+            label: 'Report self',
           ),
         ],
         currentIndex: _selectedIndex,
