@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'blinkingText.dart';
@@ -20,6 +22,7 @@ class ScanWidgetState extends State<ScanWidget> {
 
   List<Widget> _platformVersion = [];
   bool _scanning = false;
+  Duration scanPeriod = Duration(minutes: 2);
 
   @override
   Widget build(BuildContext context) {
@@ -61,7 +64,9 @@ class ScanWidgetState extends State<ScanWidget> {
           if (noPermissions) {
             return;
           }
+
           final networks = await WifiFlutter.wifiNetworks;
+          //need to find a way to repeat this function
           setState(() {
             _platformVersion = networks
                 .map((network) => Text(

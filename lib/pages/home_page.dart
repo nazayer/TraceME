@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_bloc_authentication/blocs/authentication/authentication.dart';
+import 'package:flutter_bloc_authentication/widgets/alertsWidget.dart';
 import '../models/models.dart';
-import '../widgets/Homewidget.dart';
+import '../widgets/homeWidget.dart';
 
 class HomePage extends StatefulWidget {
   HomePage({Key key}) : super(key: key);
@@ -18,10 +19,7 @@ class _HomePage extends State<HomePage> {
 
   static List<Widget> _widgetOptions = <Widget>[
     HomeWidget(),
-    Text(
-      'Alerts',
-      style: optionStyle,
-    ),
+    AlertWidget(),
     Text(
       'Profile',
       style: optionStyle,
