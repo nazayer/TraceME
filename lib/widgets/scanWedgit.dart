@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'blinkingText.dart';
+import 'package:wifi_flutter/wifi_flutter.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../blocs/blocs.dart';
 import 'package:flutter/animation.dart';
@@ -13,7 +14,13 @@ class ScanWidget extends StatefulWidget {
 }
 
 class ScanWidgetState extends State<ScanWidget> {
+  void initState() {
+    super.initState();
+  }
+
+  List<Widget> _platformVersion = [];
   bool _scanning = false;
+  List<String> _bssid;
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +38,7 @@ class ScanWidgetState extends State<ScanWidget> {
           SizedBox(width: 20.00, height: 20.00),
           _scanning ? stop() : scan(),
           SizedBox(width: 20.00, height: 20.00),
-          Text('$_scanning', textAlign: TextAlign.center, style: optionStyle),
+          Text('$_bssid', textAlign: TextAlign.center, style: optionStyle),
         ]);
   }
 
@@ -40,17 +47,37 @@ class ScanWidgetState extends State<ScanWidget> {
       width: 150.0,
       height: 150.0,
       child: FloatingActionButton(
-          child: new Icon(
-            Icons.play_arrow_rounded,
-            color: Colors.white,
-            size: 100.00,
-          ),
-          backgroundColor: Colors.green,
-          onPressed: () {
-            setState(() {
-              _scanning = !_scanning;
-            });
-          }),
+        child: new Icon(
+          Icons.play_arrow_rounded,
+          color: Colors.white,
+          size: 100.00,
+        ),
+        backgroundColor: Colors.green,
+        onPressed: () async {
+          final noPermissions = await WifiFlutter.promptPermissions();
+          if (noPermissions) {
+            return;
+          }
+          final networks = await WifiFlutter.wifiNetworks;
+          setState(() {
+            _platformVersion = networks
+                .map((network) => Text(
+                    "Ssid ${network.ssid} - Strength ${network.rssi} - Secure ${network.isSecure}"))
+                .toList();
+            // _bssid =
+            //     networks.map((network) => Text("${network.ssid}")).toList();
+            _bssid = networks.map((network) => network.ssid).toList();
+
+            _scanning = !_scanning;
+          });
+        },
+        // onPressed: () {
+        //   final networks = WifiFlutter.scanNetworks();
+        //   setState(() {
+        //     _scanning = !_scanning;
+        //   });
+        // },
+      ),
     );
   }
 
@@ -68,6 +95,7 @@ class ScanWidgetState extends State<ScanWidget> {
           onPressed: () {
             setState(() {
               _scanning = !_scanning;
+              _bssid = null;
             });
           }),
     );
