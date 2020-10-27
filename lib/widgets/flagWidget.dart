@@ -38,16 +38,32 @@ class FlagWidgetState extends State<FlagWidget> {
           textAlign: TextAlign.center,
         ),
         SizedBox(width: 100.00, height: 50.00),
-        Container(
-          width: 50.00,
-          child: TextField(
-            decoration: InputDecoration(
-              labelText: 'Test Number',
-              filled: true,
-              isDense: true,
+        Align(
+            alignment: Alignment.center,
+            child: Container(
+              width: 200.00,
+              child: TextField(
+                keyboardType: TextInputType.number,
+                decoration:
+                    InputDecoration(labelText: 'Test Number', isDense: true),
+              ),
+            )),
+        SizedBox(width: 100.00, height: 20.00),
+        Align(
+          alignment: Alignment.center,
+          child: Container(
+            width: 100.00,
+            child: RaisedButton(
+              color: Theme.of(context).primaryColor,
+              textColor: Colors.black87,
+              padding: const EdgeInsets.all(16),
+              shape: new RoundedRectangleBorder(
+                  borderRadius: new BorderRadius.circular(8.0)),
+              child: Text('Submit'),
+              onPressed: () {},
             ),
           ),
-        ),
+        )
       ],
     );
   }
