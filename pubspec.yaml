@@ -1,4 +1,4 @@
-name: flutter_bloc_authentication
+name: TraceMe
 description: A simple Flutter project that ilustrates contact tracing using Wifi
 
 version: 1.0.0+1
@@ -11,6 +11,7 @@ dependencies:
   flutter_bloc: ^6.0.0
   equatable: ^1.2.0
   wifi_flutter: ^0.1.0+1
+  wifi_iot: ^0.1.1
   flutter:
     sdk: flutter
     

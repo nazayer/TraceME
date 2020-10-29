@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_bloc_authentication/blocs/authentication/authentication.dart';
-import 'package:flutter_bloc_authentication/widgets/alertsWidget.dart';
+import 'package:TraceMe/blocs/authentication/authentication.dart';
+import 'package:TraceMe/widgets/alertsWidget.dart';
 import '../models/models.dart';
 import '../widgets/homeWidget.dart';
 import '../widgets/flagWidget.dart';

@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'blinkingText.dart';
 import 'package:wifi_flutter/wifi_flutter.dart';
+import 'package:wifi_iot/wifi_iot.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../blocs/blocs.dart';
 import 'package:flutter/animation.dart';
@@ -23,6 +24,7 @@ class ScanWidgetState extends State<ScanWidget> {
   List<Widget> _platformVersion = [];
   bool _scanning = false;
   Duration scanPeriod = Duration(minutes: 2);
+  String _bssid = '';
 
   @override
   Widget build(BuildContext context) {
@@ -64,7 +66,7 @@ class ScanWidgetState extends State<ScanWidget> {
           if (noPermissions) {
             return;
           }
-
+          final bssidTest = await WiFiForIoTPlugin.getBSSID();
           final networks = await WifiFlutter.wifiNetworks;
           //need to find a way to repeat this function
           setState(() {
@@ -73,7 +75,8 @@ class ScanWidgetState extends State<ScanWidget> {
                       '''
                 Ssid: ${network.ssid}
                 Strength: ${network.rssi}
-                Timestamp: ${DateTime.now()}''',
+                Timestamp: ${DateTime.now()}
+                BSSID: ${bssidTest}''',
                       style: optionStyle,
                       textAlign: TextAlign.left,
                     ))
