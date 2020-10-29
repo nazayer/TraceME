@@ -76,7 +76,8 @@ class ScanWidgetState extends State<ScanWidget> {
                 Ssid: ${network.ssid}
                 Strength: ${network.rssi}
                 Timestamp: ${DateTime.now()}
-                BSSID: ${bssidTest}''',
+                BSSID: ${bssidTest}
+                ''',
                       style: optionStyle,
                       textAlign: TextAlign.left,
                     ))
