@@ -30,7 +30,6 @@ class _HomePage extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    final authBloc = BlocProvider.of<AuthenticationBloc>(context);
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
@@ -102,7 +101,7 @@ class _HomePage extends State<HomePage> {
             label: 'Alerts',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.person),
+            icon: Icon(Icons.campaign),
             label: 'Report self',
           ),
         ],
