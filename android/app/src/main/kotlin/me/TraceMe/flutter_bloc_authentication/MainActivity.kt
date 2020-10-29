@@ -1,4 +1,4 @@
-package me.vincenyanga.flutter_bloc_authentication
+package me.TraceMe
 
 import androidx.annotation.NonNull;
 import io.flutter.embedding.android.FlutterActivity

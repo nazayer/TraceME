@@ -17,7 +17,7 @@ class FakeAuthenticationService extends AuthenticationService {
   Future<User> signInWithEmailAndPassword(String email, String password) async {
     await Future.delayed(Duration(seconds: 1)); // simulate a network delay
 
-    if (email.toLowerCase() != 'test@d.com' || password != '123') {
+    if (email.toLowerCase() != 'test@traceme.com' || password != '123456') {
       throw AuthenticationException(message: 'Wrong username or password');
     }
     return User(name: 'Test User', email: email);
