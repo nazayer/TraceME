@@ -71,7 +71,8 @@ class _HomePage extends State<HomePage> {
             ListTile(
               title: Text('Log out'),
               onTap: () {
-                authBloc.add(UserLoggedOut());
+                _showMyDialog(context);
+                //authBloc.add(UserLoggedOut());
               },
             ),
           ],
@@ -109,6 +110,42 @@ class _HomePage extends State<HomePage> {
         selectedItemColor: Colors.amber[800],
         onTap: _onItemTapped,
       ),
+    );
+  }
+
+  Future<void> _showMyDialog(context) async {
+    final authBloc = BlocProvider.of<AuthenticationBloc>(context);
+    return showDialog<void>(
+      context: context,
+      barrierDismissible: false, // user must tap button!
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('Warning!'),
+          content: SingleChildScrollView(
+            child: ListBody(
+              children: <Widget>[
+                Text(
+                    'Are you usre you want to log out and quite the contact tracing application?'),
+              ],
+            ),
+          ),
+          actions: <Widget>[
+            TextButton(
+              child: Text('Cancel'),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+            TextButton(
+              child: Text('Yes'),
+              onPressed: () {
+                Navigator.of(context).pop();
+                authBloc.add(UserLoggedOut());
+              },
+            ),
+          ],
+        );
+      },
     );
   }
 }

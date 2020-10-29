@@ -101,10 +101,7 @@ class ScanWidgetState extends State<ScanWidget> {
           ),
           backgroundColor: Colors.red,
           onPressed: () {
-            setState(() {
-              _scanning = !_scanning;
-              _platformVersion.clear();
-            });
+            _showMyDialog();
           }),
     );
   }
@@ -119,4 +116,43 @@ class ScanWidgetState extends State<ScanWidget> {
     fontSize: 15,
     fontWeight: FontWeight.w500,
   );
+  Future<void> _showMyDialog() async {
+    return showDialog<void>(
+      context: context,
+      barrierDismissible: false, // user must tap button!
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('Warning!'),
+          content: SingleChildScrollView(
+            child: ListBody(
+              children: <Widget>[
+                Text(
+                    'This action will cause the application to stop contact tracing function.'),
+                SizedBox(width: 20, height: 20),
+                Text('Would you like to continue?'),
+              ],
+            ),
+          ),
+          actions: <Widget>[
+            TextButton(
+              child: Text('Cancel'),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+            TextButton(
+              child: Text('OK'),
+              onPressed: () {
+                setState(() {
+                  _scanning = !_scanning;
+                  _platformVersion.clear();
+                });
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
 }
