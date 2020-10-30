@@ -20,7 +20,6 @@ class ScanWidgetState extends State<ScanWidget> {
   List<Widget> _platformVersion = [];
   bool _scanning = false;
   Duration scanPeriod = Duration(minutes: 2);
-  String _bssid = '';
 
   @override
   Widget build(BuildContext context) {
@@ -72,7 +71,7 @@ class ScanWidgetState extends State<ScanWidget> {
                 Ssid: ${network.ssid}
                 Strength: ${network.rssi}
                 Timestamp: ${DateTime.now()}
-                BSSID: ${bssidTest}
+                BSSID: $bssidTest
                 ''',
                       style: optionStyle,
                       textAlign: TextAlign.left,
