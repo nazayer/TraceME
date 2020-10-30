@@ -1,13 +1,9 @@
 import 'dart:async';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'blinkingText.dart';
 import 'package:wifi_flutter/wifi_flutter.dart';
 import 'package:wifi_iot/wifi_iot.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import '../blocs/blocs.dart';
-import 'package:flutter/animation.dart';
 
 class ScanWidget extends StatefulWidget {
   @override

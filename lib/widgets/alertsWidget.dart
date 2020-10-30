@@ -1,7 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:TraceMe/blocs/authentication/authentication.dart';
-import '../models/models.dart';
 
 class AlertWidget extends StatelessWidget {
   @override
