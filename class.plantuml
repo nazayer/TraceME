@@ -1,0 +1,285 @@
+@startuml
+set namespaceSeparator ::
+
+class "TraceMe::blocs::authentication::authentication_bloc.dart::AuthenticationBloc" {
+  -AuthenticationService _authenticationService
+  +AuthenticationState initialState
+  +Stream mapEventToState()
+  -Stream _mapAppLoadedToState()
+  -Stream _mapUserLoggedInToState()
+  -Stream _mapUserLoggedOutToState()
+}
+
+"TraceMe::blocs::authentication::authentication_bloc.dart::AuthenticationBloc" o-- "TraceMe::services::authentication_service.dart::AuthenticationService"
+"TraceMe::blocs::authentication::authentication_bloc.dart::AuthenticationBloc" o-- "TraceMe::blocs::authentication::authentication_state.dart::AuthenticationState"
+"bloc::src::bloc.dart::Bloc<Event, State>" <|-- "TraceMe::blocs::authentication::authentication_bloc.dart::AuthenticationBloc"
+
+abstract class "TraceMe::blocs::authentication::authentication_event.dart::AuthenticationEvent" {
+  +List<Object> props
+}
+
+"equatable::src::equatable.dart::Equatable" <|-- "TraceMe::blocs::authentication::authentication_event.dart::AuthenticationEvent"
+
+class "TraceMe::blocs::authentication::authentication_event.dart::AppLoaded" {
+}
+
+"TraceMe::blocs::authentication::authentication_event.dart::AuthenticationEvent" <|-- "TraceMe::blocs::authentication::authentication_event.dart::AppLoaded"
+
+class "TraceMe::blocs::authentication::authentication_event.dart::UserLoggedIn" {
+  +User user
+  +List<Object> props
+}
+
+"TraceMe::blocs::authentication::authentication_event.dart::UserLoggedIn" o-- "TraceMe::models::user.dart::User"
+"TraceMe::blocs::authentication::authentication_event.dart::AuthenticationEvent" <|-- "TraceMe::blocs::authentication::authentication_event.dart::UserLoggedIn"
+
+class "TraceMe::blocs::authentication::authentication_event.dart::UserLoggedOut" {
+}
+
+"TraceMe::blocs::authentication::authentication_event.dart::AuthenticationEvent" <|-- "TraceMe::blocs::authentication::authentication_event.dart::UserLoggedOut"
+
+abstract class "TraceMe::blocs::authentication::authentication_state.dart::AuthenticationState" {
+  +List<Object> props
+}
+
+"equatable::src::equatable.dart::Equatable" <|-- "TraceMe::blocs::authentication::authentication_state.dart::AuthenticationState"
+
+class "TraceMe::blocs::authentication::authentication_state.dart::AuthenticationInitial" {
+}
+
+"TraceMe::blocs::authentication::authentication_state.dart::AuthenticationState" <|-- "TraceMe::blocs::authentication::authentication_state.dart::AuthenticationInitial"
+
+class "TraceMe::blocs::authentication::authentication_state.dart::AuthenticationLoading" {
+}
+
+"TraceMe::blocs::authentication::authentication_state.dart::AuthenticationState" <|-- "TraceMe::blocs::authentication::authentication_state.dart::AuthenticationLoading"
+
+class "TraceMe::blocs::authentication::authentication_state.dart::AuthenticationNotAuthenticated" {
+}
+
+"TraceMe::blocs::authentication::authentication_state.dart::AuthenticationState" <|-- "TraceMe::blocs::authentication::authentication_state.dart::AuthenticationNotAuthenticated"
+
+class "TraceMe::blocs::authentication::authentication_state.dart::AuthenticationAuthenticated" {
+  +User user
+  +List<Object> props
+}
+
+"TraceMe::blocs::authentication::authentication_state.dart::AuthenticationAuthenticated" o-- "TraceMe::models::user.dart::User"
+"TraceMe::blocs::authentication::authentication_state.dart::AuthenticationState" <|-- "TraceMe::blocs::authentication::authentication_state.dart::AuthenticationAuthenticated"
+
+class "TraceMe::blocs::authentication::authentication_state.dart::AuthenticationFailure" {
+  +String message
+  +List<Object> props
+}
+
+"TraceMe::blocs::authentication::authentication_state.dart::AuthenticationState" <|-- "TraceMe::blocs::authentication::authentication_state.dart::AuthenticationFailure"
+
+class "TraceMe::blocs::login::login_bloc.dart::LoginBloc" {
+  -AuthenticationBloc _authenticationBloc
+  -AuthenticationService _authenticationService
+  +LoginState initialState
+  +Stream mapEventToState()
+  -Stream _mapLoginWithEmailToState()
+}
+
+"TraceMe::blocs::login::login_bloc.dart::LoginBloc" o-- "TraceMe::blocs::authentication::authentication_bloc.dart::AuthenticationBloc"
+"TraceMe::blocs::login::login_bloc.dart::LoginBloc" o-- "TraceMe::services::authentication_service.dart::AuthenticationService"
+"TraceMe::blocs::login::login_bloc.dart::LoginBloc" o-- "TraceMe::blocs::login::login_state.dart::LoginState"
+"bloc::src::bloc.dart::Bloc<Event, State>" <|-- "TraceMe::blocs::login::login_bloc.dart::LoginBloc"
+
+abstract class "TraceMe::blocs::login::login_event.dart::LoginEvent" {
+  +List<Object> props
+}
+
+"equatable::src::equatable.dart::Equatable" <|-- "TraceMe::blocs::login::login_event.dart::LoginEvent"
+
+class "TraceMe::blocs::login::login_event.dart::LoginInWithEmailButtonPressed" {
+  +String email
+  +String password
+  +List<Object> props
+}
+
+"TraceMe::blocs::login::login_event.dart::LoginEvent" <|-- "TraceMe::blocs::login::login_event.dart::LoginInWithEmailButtonPressed"
+
+abstract class "TraceMe::blocs::login::login_state.dart::LoginState" {
+  +List<Object> props
+}
+
+"equatable::src::equatable.dart::Equatable" <|-- "TraceMe::blocs::login::login_state.dart::LoginState"
+
+class "TraceMe::blocs::login::login_state.dart::LoginInitial" {
+}
+
+"TraceMe::blocs::login::login_state.dart::LoginState" <|-- "TraceMe::blocs::login::login_state.dart::LoginInitial"
+
+class "TraceMe::blocs::login::login_state.dart::LoginLoading" {
+}
+
+"TraceMe::blocs::login::login_state.dart::LoginState" <|-- "TraceMe::blocs::login::login_state.dart::LoginLoading"
+
+class "TraceMe::blocs::login::login_state.dart::LoginSuccess" {
+}
+
+"TraceMe::blocs::login::login_state.dart::LoginState" <|-- "TraceMe::blocs::login::login_state.dart::LoginSuccess"
+
+class "TraceMe::blocs::login::login_state.dart::LoginFailure" {
+  +String error
+  +List<Object> props
+}
+
+"TraceMe::blocs::login::login_state.dart::LoginState" <|-- "TraceMe::blocs::login::login_state.dart::LoginFailure"
+
+class "TraceMe::exceptions::authentication_exception.dart::AuthenticationException" {
+  +String message
+}
+
+"dart::core::Exception" <|-- "TraceMe::exceptions::authentication_exception.dart::AuthenticationException"
+
+class "TraceMe::main.dart::MyApp" {
+  +Widget build()
+}
+
+"flutter::src::widgets::framework.dart::StatelessWidget" <|-- "TraceMe::main.dart::MyApp"
+
+class "TraceMe::models::user.dart::User" {
+  +String name
+  +String email
+  +String toString()
+}
+
+class "TraceMe::pages::home_page.dart::HomePage" {
+  +_HomePage createState()
+}
+
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-- "TraceMe::pages::home_page.dart::HomePage"
+
+class "TraceMe::pages::home_page.dart::_HomePage" {
+  -int _selectedIndex
+  {static} -List<Widget> _widgetOptions
+  -void _onItemTapped()
+  +Widget build()
+  -Future _showMyDialog()
+}
+
+"flutter::src::widgets::framework.dart::State<T>" <|-- "TraceMe::pages::home_page.dart::_HomePage"
+
+class "TraceMe::pages::login_page.dart::LoginPage" {
+  +Widget build()
+}
+
+"flutter::src::widgets::framework.dart::StatelessWidget" <|-- "TraceMe::pages::login_page.dart::LoginPage"
+
+class "TraceMe::pages::login_page.dart::_AuthForm" {
+  +Widget build()
+}
+
+"flutter::src::widgets::framework.dart::StatelessWidget" <|-- "TraceMe::pages::login_page.dart::_AuthForm"
+
+class "TraceMe::pages::login_page.dart::_SignInForm" {
+  +__SignInFormState createState()
+}
+
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-- "TraceMe::pages::login_page.dart::_SignInForm"
+
+class "TraceMe::pages::login_page.dart::__SignInFormState" {
+  -GlobalKey<FormState> _key
+  -TextEditingController _passwordController
+  -TextEditingController _emailController
+  -bool _autoValidate
+  +Widget build()
+  -void _showError()
+}
+
+"TraceMe::pages::login_page.dart::__SignInFormState" o-- "flutter::src::widgets::framework.dart::GlobalKey<FormState>"
+"TraceMe::pages::login_page.dart::__SignInFormState" o-- "flutter::src::widgets::editable_text.dart::TextEditingController"
+"flutter::src::widgets::framework.dart::State<T>" <|-- "TraceMe::pages::login_page.dart::__SignInFormState"
+
+abstract class "TraceMe::services::authentication_service.dart::AuthenticationService" {
+  +Future getCurrentUser()
+  +Future signInWithEmailAndPassword()
+  +Future signOut()
+}
+
+class "TraceMe::services::authentication_service.dart::FakeAuthenticationService" {
+  +Future getCurrentUser()
+  +Future signInWithEmailAndPassword()
+  +Future signOut()
+}
+
+"TraceMe::services::authentication_service.dart::AuthenticationService" <|-- "TraceMe::services::authentication_service.dart::FakeAuthenticationService"
+
+class "TraceMe::widgets::alertsWidget.dart::AlertWidget" {
+  {static} +TextStyle optionStyle
+  {static} +TextStyle noAlertStyle
+  +Widget build()
+}
+
+"TraceMe::widgets::alertsWidget.dart::AlertWidget" o-- "flutter::src::painting::text_style.dart::TextStyle"
+"flutter::src::widgets::framework.dart::StatelessWidget" <|-- "TraceMe::widgets::alertsWidget.dart::AlertWidget"
+
+class "TraceMe::widgets::blinkingText.dart::MyBlinkingText" {
+  +_MyBlinkingButtonState createState()
+}
+
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-- "TraceMe::widgets::blinkingText.dart::MyBlinkingText"
+
+class "TraceMe::widgets::blinkingText.dart::_MyBlinkingButtonState" {
+  -AnimationController _animationController
+  {static} +TextStyle flashingStyle
+  +void initState()
+  +Widget build()
+  +void dispose()
+}
+
+"TraceMe::widgets::blinkingText.dart::_MyBlinkingButtonState" o-- "flutter::src::animation::animation_controller.dart::AnimationController"
+"TraceMe::widgets::blinkingText.dart::_MyBlinkingButtonState" o-- "flutter::src::painting::text_style.dart::TextStyle"
+"flutter::src::widgets::framework.dart::State<T>" <|-- "TraceMe::widgets::blinkingText.dart::_MyBlinkingButtonState"
+"flutter::src::widgets::ticker_provider.dart::SingleTickerProviderStateMixin<T>" <|-- "TraceMe::widgets::blinkingText.dart::_MyBlinkingButtonState"
+
+class "TraceMe::widgets::flagWidget.dart::FlagWidget" {
+  +State createState()
+}
+
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-- "TraceMe::widgets::flagWidget.dart::FlagWidget"
+
+class "TraceMe::widgets::flagWidget.dart::FlagWidgetState" {
+  +TextStyle smallTextStyle
+  +TextStyle optionStyle
+  +Widget build()
+}
+
+"TraceMe::widgets::flagWidget.dart::FlagWidgetState" o-- "flutter::src::painting::text_style.dart::TextStyle"
+"flutter::src::widgets::framework.dart::State<T>" <|-- "TraceMe::widgets::flagWidget.dart::FlagWidgetState"
+
+class "TraceMe::widgets::homeWidget.dart::HomeWidget" {
+  {static} +TextStyle optionStyle
+  +Widget build()
+}
+
+"TraceMe::widgets::homeWidget.dart::HomeWidget" o-- "flutter::src::painting::text_style.dart::TextStyle"
+"flutter::src::widgets::framework.dart::StatelessWidget" <|-- "TraceMe::widgets::homeWidget.dart::HomeWidget"
+
+class "TraceMe::widgets::scanWedgit.dart::ScanWidget" {
+  +State createState()
+}
+
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-- "TraceMe::widgets::scanWedgit.dart::ScanWidget"
+
+class "TraceMe::widgets::scanWedgit.dart::ScanWidgetState" {
+  -List<Widget> _platformVersion
+  -bool _scanning
+  +Duration scanPeriod
+  {static} +TextStyle flashingStyle
+  {static} +TextStyle optionStyle
+  +void initState()
+  +Widget build()
+  +Widget scan()
+  +Widget stop()
+  -Future _showMyDialog()
+}
+
+"TraceMe::widgets::scanWedgit.dart::ScanWidgetState" o-- "flutter::src::painting::text_style.dart::TextStyle"
+"flutter::src::widgets::framework.dart::State<T>" <|-- "TraceMe::widgets::scanWedgit.dart::ScanWidgetState"
+
+
+@enduml
